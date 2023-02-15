@@ -192,6 +192,8 @@ void Arbol_Bin::mostrarNivel(int x){
 }
 
 
+
+
 int Arbol_Bin::contarNivel(NodoInt *raiz){
 	
 	if(raiz != nullptr){
