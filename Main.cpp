@@ -5,6 +5,8 @@
 
 using namespace std;
 
+void test();
+
 int main(){
 	
 	setlocale(LC_ALL, "Spanish");		//idioma y acentos
@@ -26,7 +28,7 @@ int main(){
         switch (op){
         	
         	case 1:
-        		cout<<"\nDigite el número a ingresar en el Árbol: ";
+        		cout<<"\nDigite el nï¿½mero a ingresar en el Árbol: ";
         		cin>>num;
         		
         		arbolito.insertarDato(num);
@@ -76,7 +78,7 @@ int main(){
         	break;
         	
         	case 8:
-        		cout<<"Ingrese el número a eliminar del árbol: ";
+        		cout<<"Ingrese el número a eliminar del Árbol: ";
         		cin>>numEliminar;
         		arbolito.eliminarNodo(numEliminar);
         		cout<<"\n";

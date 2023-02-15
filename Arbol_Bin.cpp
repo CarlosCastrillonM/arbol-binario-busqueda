@@ -170,10 +170,37 @@ void Arbol_Bin::eliminarNodo(NodoInt *&raiz, int valor) {
     }
 }
 
-void Arbol_Bin::eliminarNodo(int valor){
-	eliminarNodo(raiz, valor);
-}
+bool Arbol_Bin::eliminarNodo(int valor){
+	NodoInt *nEliminar = buscarNodo(raiz, valor);
+	NodoInt *reemplazo, *padreE;
 
+	if (nEliminar == nullptr) {
+		return false;
+	}
+
+	if (nEliminar->izq) {
+		reemplazo = max(nEliminar->izq);
+	}
+
+	else if (nEliminar->der) {
+		reemplazo = min(nEliminar->der);
+	}
+
+	padreE = padre(raiz, reemplazo->dato);
+	nEliminar->dato = reemplazo->dato;
+
+	if (padreE == nullptr) {
+		delete raiz;
+		raiz = nullptr;
+		return true;
+	}
+
+	if (padreE->izq == reemplazo) padreE->izq = nullptr;
+	if (padreE->der == reemplazo) padreE->der = nullptr;
+
+	delete reemplazo;
+	return true;
+}
 
 
 void Arbol_Bin::mostrarNivel(NodoInt *raiz, int nivel){
@@ -192,8 +219,6 @@ void Arbol_Bin::mostrarNivel(int x){
 }
 
 
-
-
 int Arbol_Bin::contarNivel(NodoInt *raiz){
 	
 	if(raiz != nullptr){
@@ -206,6 +231,79 @@ int Arbol_Bin::contarNivel(NodoInt *raiz){
 		}else{
 			return der;
 		}
+	}
+}
+
+NodoInt *Arbol_Bin::min(NodoInt *raiz)
+{
+    if (raiz == nullptr){
+    	return nullptr;
+	}
+
+	if (raiz->izq) {
+		return min(raiz->izq);
+	}
+	if (raiz->der) {
+		return min(raiz->der); 	
+	}
+
+	return raiz;
+}
+
+NodoInt *Arbol_Bin::max(NodoInt *raiz)
+{
+	if (raiz == nullptr){
+    	return nullptr;
+	}
+
+	if (raiz->der) {
+		return max(raiz->der); 	
+	}
+	if (raiz->izq) {
+		return max(raiz->izq);
+	}
+
+	return raiz;
+}
+
+
+NodoInt *Arbol_Bin::padre(NodoInt *raiz, int valor){
+    if(raiz == nullptr){
+		return nullptr;
+	}
+
+	if (raiz->izq && raiz->izq->dato == valor){			
+		return raiz;
+	}
+
+	if (raiz->der && raiz->der->dato == valor){			
+		return raiz;
+	}
+
+	if(valor < raiz->dato){
+		return padre(raiz->izq, valor);
+	
+	}else{
+		return padre(raiz->der, valor);
+	}
+
+}
+
+
+NodoInt *Arbol_Bin::buscarNodo(NodoInt *raiz, int valor) {
+	if (raiz == nullptr) {
+    	return nullptr;
+	}
+
+	if (raiz->dato == valor) {
+		return raiz;
+	}
+
+	if (raiz->dato > valor) {
+		return buscarNodo(raiz->izq, valor);
+	
+	} else {
+		return buscarNodo(raiz->der, valor);
 	}
 }
 

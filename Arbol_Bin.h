@@ -28,16 +28,21 @@ private:
     void eliminarNodo(NodoInt *&raiz, int valor);
     void mostrarNivel(NodoInt *raiz, int nivel);
     int contarNivel(NodoInt *raiz);
+
+	static NodoInt *min(NodoInt *raiz);
+	static NodoInt *max(NodoInt *raiz);
+	static NodoInt *padre(NodoInt *raiz, int valor);
+	static NodoInt *buscarNodo(NodoInt *raiz, int valor);
     
 public:
 	bool arbolVacio();
 	void insertarDato(int x);
-	void mostrarArbol(int n);
+	void mostrarArbol(int n = 0);
     bool buscarDato(int valor);
     void preOrden();
     void inOrden();
     void posOrden();
-    void eliminarNodo(int valor);
+    bool eliminarNodo(int valor);
     void mostrarNivel(int nivel);
     int contarNivel();
 };
